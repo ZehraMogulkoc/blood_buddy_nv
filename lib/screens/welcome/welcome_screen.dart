@@ -8,6 +8,7 @@ class TestStartingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black38,),
       body: Stack(
         children: [
         Container(

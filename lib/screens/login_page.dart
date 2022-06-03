@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:blood_buddy_nv/models/providers.dart';
 import 'package:blood_buddy_nv/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:http/http.dart' as http;
 import 'dart:async';
 
 
@@ -19,12 +21,36 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String email = '';
-  String password = '';
 
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  Future<List?> login()async{
+
+    Uri myUri = Uri.parse("http://10.0.2.2/bloodbuddy/donor_login.php");
+    final response=await http.post(myUri,body:{
+      //connect to login.php file and check if user exits and the password is correct. I f it is, then log in
+      "email": email.text,
+      "password": password.text,
+    });
+    var datauser=json.decode(response.body);
+    if(datauser != '"hiçbir veri post edilmedi"'){
+      print("başarılı olmalı");
+      print(datauser);
+      //Navigator.pushReplacementNamed(context, '/page1');
+      setState(() {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => TestStartingScreen()));
+      });
+    }
+    setState(() {
+      email.text=datauser[0]['first_name'];
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     bool isDonor= Provider.of<providers>(context).isDonor;
 
     return Scaffold(
@@ -59,6 +85,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
                     Padding(
                       padding: const EdgeInsets.only(right: 20, left: 20),
                       child: TextFormField(
+                        controller: email,
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
@@ -74,9 +101,6 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
                           ),
                           border: OutlineInputBorder(),
                         ),
-                        onChanged: (value) {
-                          email = value;
-                        },
                       ),
                     ),
                     SizedBox(
@@ -85,6 +109,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
                     Padding(
                       padding: const EdgeInsets.only(right: 20, left: 20),
                       child: TextFormField(
+                        controller: password,
                         textAlign: TextAlign.center,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -99,9 +124,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
                           ),
                           border: OutlineInputBorder(),
                         ),
-                        onChanged: (value) {
-                          password = value;
-                        },
+
                       ),
                     ),
                     SizedBox(
@@ -113,10 +136,9 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
                     FlatButton(
 
                       onPressed: () async {
-                        setState(() {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => TestStartingScreen()));
-                        });
+                        print(email.text);
+                        login();
+
                         try {
                           if (true) {
                             setState(() {
