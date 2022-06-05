@@ -24,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController phone = TextEditingController();
   TextEditingController dob = TextEditingController();
   TextEditingController hostpital = TextEditingController();
+  TextEditingController blood = TextEditingController();
   String Year ='';
   String Month='';
   String Date='';
@@ -37,44 +38,38 @@ class _SignUpState extends State<SignUp> {
       var url_donor =
           "http://192.168.1.16/bloodbuddy/donor.php";
       var url_staff =
-          "http://192.168.1.16/bloodbuddy/hospital_staff.php"; //use your own ip
+          "http://192.168.1.16/bloodbuddy/hospital_staff.php";
+      var url_blood='http://192.168.1.16/bloodbuddy/blood.php';//use your own ip
       //connect to register.php file
       Uri myUri = Uri.parse(url);
       Uri myUri_donor = Uri.parse(url_donor);
       Uri myUri_staff = Uri.parse(url_staff);
+      Uri myUri_blood = Uri.parse(url_blood);
       var response;
-      var response_donor;
+      var response_blood;
       var response_staff;
+      String donor="Donor";
+      String staff="Medical Personnel";
       if(!isDonor){
         response_staff = await http.post(myUri_staff, body: {
           "first_name": first_name.text,
           "last_name": last_name.text,
           "password": password.text,
+          "status":staff,
           "Year": Year,
           "Month": Month,
           "Date": Date,
           "phone": phone.text,
           "email":email.text,
           "address": address.text,
-
-        });
-         response = await http.post(myUri, body: {
-          "first_name": first_name.text,
-          "last_name": last_name.text,
-          "password": password.text,
-          "Year": Year,
-          "Month": Month,
-          "Date": Date,
-          "phone": phone.text,
-          "email":email.text,
-          "address": address.text,
-
         });
       }else{
-         response = await http.post(myUri, body: {
+
+        response = await http.post(myUri, body: {
           "first_name": first_name.text,
           "last_name": last_name.text,
           "password": password.text,
+          "status":donor,
           "Year": Year,
           "Month": Month,
           "Date": Date,
@@ -83,16 +78,20 @@ class _SignUpState extends State<SignUp> {
           "address": address.text,
 
         });
+        response_blood=await http.post(myUri_blood, body: {
+          "blood_type":blood.text,
+                  });
       }
 
-
+var data_blood=json.encode(response_blood.body);
       var data = json.encode(response.body);
+      print(data_blood);
       print(data);
-      if (data != '"New record created successfullyNew contact record created successfully"') {
-        Fluttertoast.showToast(
+     // if (data != '"New record created successfullyNew contact record created successfully"') {
+    //    Fluttertoast.showToast(
           //check if user is already exits or not
-            msg: 'User allready exit!');
-      } else {
+    //        msg: 'User allready exit!');
+   //   } else {
         Fluttertoast.showToast(
             msg: "Account created successfully",
             toastLength: Toast.LENGTH_LONG,
@@ -111,7 +110,7 @@ class _SignUpState extends State<SignUp> {
         } catch (e) {
           print(e);
         }
-      }
+
     }
 
     return Scaffold(
@@ -254,10 +253,10 @@ class _SignUpState extends State<SignUp> {
                         ),
                         onPressed: () {
                           showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1600),
-                                  lastDate: DateTime(2030))
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1600),
+                              lastDate: DateTime(2030))
                               .then((date) {
                             setState(() {
 
@@ -287,6 +286,27 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                     ),
+                    isDonor ? TextMethod('Blood Type') : SizedBox.shrink(),
+                    if (isDonor)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0, left: 10),
+                        child: TextFormField(
+                          controller: blood,
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            labelText: "Blood Type",
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Roboto',
+                            ),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
                     !isDonor ? TextMethod('Hospital Name') : SizedBox.shrink(),
                     if (!isDonor)
                       Padding(
@@ -316,10 +336,10 @@ class _SignUpState extends State<SignUp> {
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.red.shade900),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        )),
+                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            )),
                       ),
                       onPressed: () async {
                         register();

@@ -1,6 +1,7 @@
 import 'dart:convert';
-
+//both
 import 'package:blood_buddy_nv/models/providers.dart';
+import 'package:blood_buddy_nv/screens/contact_donor.dart';
 import 'package:blood_buddy_nv/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ import 'dart:async';
 
 import 'package:provider/provider.dart';
 
+import 'entering_page.dart';
 import 'sign_up.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  Future<List?> login()async{
+  Future<List?> login(bool isDonor)async{
 
     Uri myUri = Uri.parse("http://10.0.2.2/bloodbuddy/donor_login.php");
     final response=await http.post(myUri,body:{
@@ -38,8 +40,13 @@ class _LoginPageState extends State<LoginPage> {
       print(datauser);
       //Navigator.pushReplacementNamed(context, '/page1');
       setState(() {
+        if(isDonor){
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TestStartingScreen()));
+            MaterialPageRoute(builder: (context) => TestStartingScreen()));}
+        else{
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ContactDonor()));
+        }
       });
     }
     setState(() {
@@ -55,7 +62,10 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-appBar: AppBar(backgroundColor: Colors.red.shade900,),
+appBar: AppBar(backgroundColor: Colors.red.shade900,leading: IconButton(
+  icon: Icon(Icons.arrow_back, color: Colors.black),
+  onPressed: () => Navigator.push(context,  MaterialPageRoute(builder: (context) => enterinPage()),)
+), ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -137,7 +147,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,),
 
                       onPressed: () async {
                         print(email.text);
-                        login();
+                        login(isDonor);
 
                         try {
                           if (true) {

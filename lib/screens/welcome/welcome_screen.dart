@@ -4,10 +4,14 @@ import 'package:get/get.dart';
 import 'package:blood_buddy_nv/constants.dart';
 import 'package:blood_buddy_nv/screens/quiz/quiz_screen.dart';
 
+import '../donor_drawet.dart';
+
+
 class TestStartingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DonorDrawer(),
       appBar: AppBar(backgroundColor: Colors.black38,),
       body: Stack(
         children: [

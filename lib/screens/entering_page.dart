@@ -1,5 +1,5 @@
 
-
+//beginning page
 import 'package:blood_buddy_nv/screens/sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
