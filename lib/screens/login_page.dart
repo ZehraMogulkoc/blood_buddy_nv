@@ -26,39 +26,54 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  Future<List?> login(bool isDonor)async{
 
-    Uri myUri = Uri.parse("http://10.0.2.2/bloodbuddy/donor_login.php");
-    final response=await http.post(myUri,body:{
-      //connect to login.php file and check if user exits and the password is correct. I f it is, then log in
-      "email": email.text,
-      "password": password.text,
-    });
-    var datauser=json.decode(response.body);
-    if(datauser != '"hiçbir veri post edilmedi"'){
-      print("başarılı olmalı");
-      print(datauser);
-      //Navigator.pushReplacementNamed(context, '/page1');
-      setState(() {
-        if(isDonor){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TestStartingScreen()));}
-        else{
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ContactDonor()));
-        }
-      });
-    }
-    setState(() {
-      email.text=datauser[0]['first_name'];
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {
-
+    var user= Provider.of<providers>(context).user;
     bool isDonor= Provider.of<providers>(context).isDonor;
+    String status= isDonor ?"Donor" :"Medical Personnel";
+    Future<List?> login(bool isDonor)async{
+
+      Uri myUri = Uri.parse("http://10.0.2.2/bloodbuddy/donor_login.php");
+      final response=await http.post(myUri,body:{
+        //connect to login.php file and check if user exits and the password is correct. I f it is, then log in
+        "email": email.text,
+        "password": password.text,
+        "status": status,
+      });
+      var datauser=json.decode(response.body);
+
+      if(datauser != '"hiçbir veri post edilmedi"'){
+        print("başarılı olmalı");
+        print(datauser);
+        //Navigator.pushReplacementNamed(context, '/page1');
+        setState(() {
+          if(isDonor){
+            var currentUser =Provider.of<providers>(context,listen: false).currentUser(datauser);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => TestStartingScreen()));}
+          else{
+            var currentUser =Provider.of<providers>(context,listen: false).currentUser(datauser);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ContactDonor()));
+          }
+        });
+      }else{
+        Fluttertoast.showToast(
+            msg: "This user does not exists. Try again or sign up!",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.redAccent,
+            textColor: Colors.white,
+            fontSize: 20.0);
+      }
+      setState(() {
+        email.text=datauser[0]['first_name'];
+      });
+
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -70,8 +85,13 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,leading: IconButton(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.red, Colors.white])
+image: DecorationImage(
+          alignment: Alignment.center,
+          matchTextDirection: true,
+          repeat: ImageRepeat.noRepeat,
+          image: AssetImage("assets/images/images.png"),
+        )
+
         ),
         child: SafeArea(
           child: Center(
@@ -82,6 +102,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,leading: IconButton(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+
                     SizedBox(
                       height: 100,
                     ),
@@ -138,7 +159,7 @@ appBar: AppBar(backgroundColor: Colors.red.shade900,leading: IconButton(
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 120,
                       width: 30,
                     ),
 

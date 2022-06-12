@@ -1,7 +1,10 @@
+import 'package:blood_buddy_nv/screens/request_blood.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'contact_donor.dart';
 import 'entering_page.dart';
+import 'entetransaction.dart';
 
 class StaffDrawer extends StatelessWidget {
   @override
@@ -53,7 +56,7 @@ class StaffDrawer extends StatelessWidget {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(context,   MaterialPageRoute(builder: (context) => RequestBlood()));
                   },
                   leading: new Icon(
                     Icons.list_alt_outlined,
@@ -74,10 +77,31 @@ class StaffDrawer extends StatelessWidget {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(context,   MaterialPageRoute(builder: (context) => ContactDonor()));
                   },
                   leading: new Icon(
                     Icons.phone,
+                    size: 26.0,
+                    color: Colors.black,
+                  ),
+                ),
+                new ListTile(
+                  title: new Text(
+                    'Transaction',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,   MaterialPageRoute(builder: (context) => ETR()));
+                  },
+                  leading: new Icon(
+                    Icons.account_circle_sharp,
                     size: 26.0,
                     color: Colors.black,
                   ),

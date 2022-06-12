@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
     return  MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context)=> providers())
+
       ],
       child: GetMaterialApp(
         home: enterinPage(),

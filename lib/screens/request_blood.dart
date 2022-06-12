@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:blood_buddy_nv/screens/blood_request.dart';
 import 'package:blood_buddy_nv/screens/loading.dart';
 import 'package:blood_buddy_nv/screens/staff_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+
+import 'login_page.dart';
 //for hospital personnel
 class RequestBlood extends StatefulWidget {
 
@@ -19,13 +25,16 @@ class _RequestBloodState extends State<RequestBlood> {
 
 
   TextEditingController displayNameController = TextEditingController();
+  TextEditingController lastname = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController bloodGroupController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController bloodNeedDateController = TextEditingController();
 
-
+var month;
+var year;
+var day;
   pickDate() async {
     DateTime? date = await showDatePicker(
       context: context,
@@ -36,15 +45,56 @@ class _RequestBloodState extends State<RequestBlood> {
 
     if(date !=null){
       setState(() {
-        bloodNeedDateController.text = date.year.toString() +"-"+ date.month.toString() +"-"+date.day.toString();
+      //  bloodNeedDateController.text = date.year.toString() +"-"+  +"-"+date.day.toString();
+    month=date.month.toString();
+        year=date.year.toString();
+        day=date.day.toString();
       });
     }
   }
+  Future<List?> registerRecipient() async {
 
+    var url ="http://192.168.1.25/bloodbuddy/recipient_register.php";
+
+    var url_blodd="http://192.168.1.25/bloodbuddy/blood_recipient.php";
+    Uri myUri_blood = Uri.parse(url_blodd);
+    //connect to register.php file
+    Uri myUri = Uri.parse(url);
+    var response;
+    String recepient="Recipient";
+    var response_blood;
+    response= await http.post(myUri, body: {
+      "first_name": displayNameController.text,
+      "last_name": lastname.text,
+      "status":recepient,
+     // "Date": bloodNeedDateController.text,
+      "phone": phoneNumberController.text,
+      "address": addressController.text,
+      "Year":year,
+      "Month": month,
+      "Day":day,
+    });
+    response_blood=await http.post(myUri_blood, body: {
+      "blood_type":bloodGroupController.text,
+      "amount": amountController.text,
+    });
+    var data = json.encode(response.body);
+    var data2 = json.encode(response_blood.body);
+    print(data2);
+print(data);
+    Fluttertoast.showToast(
+        msg: "Recipient created successfully",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 20.0);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: StaffDrawer(),
+        drawer: StaffDrawer(),
         appBar: AppBar(
           title: Text("Request Blood"),
           backgroundColor: Colors.red.shade900,
@@ -61,18 +111,37 @@ class _RequestBloodState extends State<RequestBlood> {
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Donor needs your Location';
+                          return 'Must enter Name ';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
                           fillColor: Colors.grey,
-                          hintText: "Your Location",
+                          hintText: "Recipient suname",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           )
                       ),
-                      controller: addressController,
+                      controller: displayNameController,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Recipient Surname';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey,
+                          hintText: "Recipient Surname",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          )
+                      ),
+                      controller: lastname,
                     ),
                   ),
                   Padding(
@@ -175,8 +244,8 @@ class _RequestBloodState extends State<RequestBlood> {
                     child: FlatButton(
                         child: Text("Request Blood", style: TextStyle(color: Colors.white, fontSize: 20.0),),
                         color: Colors.red.shade900,
-                        onPressed: () {
-
+                        onPressed: () async{
+                          registerRecipient();
                         }
                     ),
                   ),

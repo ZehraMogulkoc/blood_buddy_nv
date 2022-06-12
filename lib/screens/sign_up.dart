@@ -33,25 +33,29 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     bool isDonor = Provider.of<providers>(context).isDonor;
     Future<List?> register() async {
+
       var url =
-          "http://192.168.1.16/bloodbuddy/donor_register.php";
+          "http://192.168.1.25/bloodbuddy/donor_register.php";
+
       var url_donor =
-          "http://192.168.1.16/bloodbuddy/donor.php";
+          "http://192.168.1.25/bloodbuddy/donor.php";
       var url_staff =
-          "http://192.168.1.16/bloodbuddy/hospital_staff.php";
-      var url_blood='http://192.168.1.16/bloodbuddy/blood.php';//use your own ip
+          "http://192.168.1.25/bloodbuddy/hospital_staff.php";
+      var url_blodd="http://192.168.1.25/bloodbuddy/blood.php";
       //connect to register.php file
       Uri myUri = Uri.parse(url);
       Uri myUri_donor = Uri.parse(url_donor);
       Uri myUri_staff = Uri.parse(url_staff);
-      Uri myUri_blood = Uri.parse(url_blood);
+      Uri myUri_blood= Uri.parse(url_blodd);
       var response;
       var response_blood;
       var response_staff;
       String donor="Donor";
       String staff="Medical Personnel";
       if(!isDonor){
-        response_staff = await http.post(myUri_staff, body: {
+print("nası yani")
+;
+        response= await http.post(myUri, body: {
           "first_name": first_name.text,
           "last_name": last_name.text,
           "password": password.text,
@@ -64,7 +68,6 @@ class _SignUpState extends State<SignUp> {
           "address": address.text,
         });
       }else{
-
         response = await http.post(myUri, body: {
           "first_name": first_name.text,
           "last_name": last_name.text,
@@ -83,10 +86,10 @@ class _SignUpState extends State<SignUp> {
                   });
       }
 
-var data_blood=json.encode(response_blood.body);
+/*var data_blood=json.encode(response_blood.body);
       var data = json.encode(response.body);
       print(data_blood);
-      print(data);
+      print(data);*/
      // if (data != '"New record created successfullyNew contact record created successfully"') {
     //    Fluttertoast.showToast(
           //check if user is already exits or not
@@ -343,7 +346,8 @@ var data_blood=json.encode(response_blood.body);
                       ),
                       onPressed: () async {
                         register();
-                      },
+
+                     },
                       child: Text(
                         'Create The Account',
                         style: TextStyle(

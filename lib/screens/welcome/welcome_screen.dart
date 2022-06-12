@@ -8,6 +8,8 @@ import '../donor_drawet.dart';
 
 
 class TestStartingScreen extends StatelessWidget {
+  TestStartingScreen();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -20,12 +20,13 @@ class _enterinPageState extends State<enterinPage> {
   Widget build(BuildContext context) {
     bool? isDonor=Provider.of<providers>(context).isDonor;
     return Scaffold(
-      appBar: AppBar( title: Center(child: Text("Blood Buddy")),
+      appBar: AppBar( title: Text("Blood Buddy"),
+        centerTitle: true,
         flexibleSpace: Container(
         decoration: BoxDecoration(
-        gradient: LinearGradient(
-        colors: [Colors.red, Colors.orange],
-      ),
+          color: Color.fromRGBO(
+            171, 39, 39, 1.0),
+
       ),)),
       body: Container(
         width: double.infinity,
@@ -34,7 +35,7 @@ class _enterinPageState extends State<enterinPage> {
             gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
-                colors: [Colors.red, Colors.white])
+                colors: [Colors.white, Colors.white])
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -71,7 +72,8 @@ class _enterinPageState extends State<enterinPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
-                color:  Colors.deepOrange,
+                color:  Color.fromRGBO(
+                    171, 39, 39, 1.0),
                 padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                 child: Text('Continue As a Hospital Personnel',
                     style: TextStyle(
@@ -92,7 +94,8 @@ class _enterinPageState extends State<enterinPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
                   ),
-                  color:  Colors.deepOrange,
+                  color:  Color.fromRGBO(
+                    171, 39, 39, 1.0),
                   padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                   child: Text('Continue As a Donor',
                       style: TextStyle(

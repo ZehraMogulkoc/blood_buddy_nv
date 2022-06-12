@@ -1,5 +1,6 @@
 import 'package:blood_buddy_nv/screens/entering_page.dart';
 import 'package:blood_buddy_nv/screens/profil_page.dart';
+import 'package:blood_buddy_nv/screens/welcome/transaction_result.dart';
 import 'package:blood_buddy_nv/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -53,11 +54,32 @@ class DonorDrawer extends StatelessWidget {
                   onTap: () {
                     // Update the state of the app
                     // ...
-                    // Then close the drawer
+                    // Then close the drawer // transaction resuşt should be in profile page
                     Navigator.push(context,   MaterialPageRoute(builder: (context) => ProfileScreen()));
                   },
                   leading: new Icon(
                     Icons.person,
+                    size: 26.0,
+                    color: Colors.black,
+                  ),
+                ),
+                new ListTile(
+                  title: new Text(
+                    'Past Actions ',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer // transaction resuşt should be in profile page
+                    Navigator.push(context,   MaterialPageRoute(builder: (context) => TransactionResult()));
+                  },
+                  leading: new Icon(
+                    Icons.pending_actions,
                     size: 26.0,
                     color: Colors.black,
                   ),

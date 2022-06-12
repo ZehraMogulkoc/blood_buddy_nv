@@ -1,9 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:provider/provider.dart';
+
+import '../models/providers.dart';
+import 'donor_drawet.dart';
 // donor page
 class ProfileScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<providers>(context).user;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Stack(
@@ -22,7 +29,8 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         Scaffold(
-          drawer: Drawer(),
+          drawer: DonorDrawer(),
+          appBar: AppBar(backgroundColor: Colors.transparent,),
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -59,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                     height: 22,
                   ),
                   Container(
-                    height: height * 0.43,
+                    height: height * 0.80,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -84,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                                       height: 90,
                                     ),
                                     Text(
-                                      'Test User',
+                                      user[0]['first_name'],
                                       style: TextStyle(
                                         color: Color.fromRGBO(171, 39, 39, 1.0),
                                         fontFamily: 'Nunito',
@@ -137,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                                         Column(
                                           children: [
                                             Text(
-                                              'Age',
+                                              'Date-of-birth',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
@@ -145,7 +153,37 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '30',
+                                              user[0]['dob'],
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    171, 39, 39, 1.0),
+                                                fontFamily: 'Nunito',
+                                                fontSize: 25,
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+
+                                      ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'Address',
+                                              style: TextStyle(
+                                                color: Colors.grey[700],
+                                                fontFamily: 'Nunito',
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                            Text(
+                                              user[0]['address'],
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     171, 39, 39, 1.0),
@@ -155,6 +193,44 @@ class ProfileScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 25,
+                                            vertical: 8,
+                                          ),
+                                          child: Container(
+                                            height: 50,
+                                            width: 3,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(100),
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'Phone ',
+                                              style: TextStyle(
+                                                color: Colors.grey[700],
+                                                fontFamily: 'Nunito',
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                            Text(
+                                              user[0]['phone'],
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    171, 39, 39, 1.0),
+                                                fontFamily: 'Nunito',
+                                                fontSize: 25,
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+
                                       ],
                                     )
                                   ],
@@ -192,55 +268,6 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    height: height * 0.5,
-                    width: width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Previous Donations',
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 39, 39, 1.0),
-                              fontSize: 27,
-                              fontFamily: 'Nunito',
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2.5,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
