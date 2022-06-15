@@ -1,3 +1,4 @@
+import 'package:blood_buddy_nv/screens/donor_drawet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blood_buddy_nv/constants.dart';
@@ -8,6 +9,8 @@ class ScoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _qnController = Get.put(QuestionController());
     return Scaffold(
+     drawer: DonorDrawer(),
+      appBar: AppBar(backgroundColor: Colors.black38, ),
       body: Stack(
         fit: StackFit.expand,
         children: [
