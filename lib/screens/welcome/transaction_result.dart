@@ -19,7 +19,7 @@ class _TransactionResultState extends State<TransactionResult> {
   //with http class, connect to php files and reach the all Data class
   getAllTransactions()async{
     print("wheree");
-    Uri myUri = Uri.parse("http://192.168.1.25/bloodbuddy/allTransaction.php"); //10.0.2.2 is need to run on android emilators
+    Uri myUri = Uri.parse("http://192.168.1.30/bloodbuddy/allTransaction.php"); //10.0.2.2 is need to run on android emilators
     var response=await http.get(myUri);
     if(response.statusCode==200){
       setState(() {
