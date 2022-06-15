@@ -92,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                                       height: 90,
                                     ),
                                     Text(
-                                      user[0]['first_name'],
+                                      user[0]['first_name']??" ",
                                       style: TextStyle(
                                         color: Color.fromRGBO(171, 39, 39, 1.0),
                                         fontFamily: 'Nunito',
@@ -153,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              user[0]['dob'],
+                                              user[0]['dob']??" ",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     171, 39, 39, 1.0),
@@ -183,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              user[0]['address'],
+                                              user[0]['address']??" ",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     171, 39, 39, 1.0),
@@ -219,7 +219,7 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              user[0]['phone'],
+                                              user[0]['phone']??" ",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     171, 39, 39, 1.0),
