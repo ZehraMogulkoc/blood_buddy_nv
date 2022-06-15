@@ -25,7 +25,7 @@ String Date='';
 Future<List?> enterTransaction() async {
 
   var url=
-      "http://192.168.1.81/bloodbuddy/transaction.php";
+      "http://192.168.1.30/bloodbuddy/transaction.php";
   Uri myUri = Uri.parse(url);
   var response_transaction;
   response_transaction= await http.post(myUri, body: {
