@@ -5,6 +5,8 @@ import 'package:blood_buddy_nv/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'blood_request.dart';
+
 class DonorDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,27 @@ class DonorDrawer extends StatelessWidget {
                   },
                   leading: new Icon(
                     Icons.pending_actions,
+                    size: 26.0,
+                    color: Colors.black,
+                  ),
+                ),
+                new ListTile(
+                  title: new Text(
+                    'See Requests ',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer // transaction resuşt should be in profile page
+                    Navigator.push(context,   MaterialPageRoute(builder: (context) => ShowRequest()));
+                  },
+                  leading: new Icon(
+                    Icons.bloodtype_outlined,
                     size: 26.0,
                     color: Colors.black,
                   ),
