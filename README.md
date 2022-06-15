@@ -2,10 +2,9 @@
 
 A new Flutter project.
 
-<img src="https://user-images.githubusercontent.com/87859856/173831305-d96e52c6-1287-4845-8c7d-7d4e213c7405.png?raw=true" alt="feed example" width="230"> 
-<img src="https://user-images.githubusercontent.com/87859856/173831359-0587d4bd-d52d-4a8a-afcf-bfebf44d0412.png?raw=true" alt="feed example" width="210">
+  <img src="https://user-images.githubusercontent.com/87859856/173832359-4d41aef1-2c77-4c70-8905-8c3934f6b77d.png?raw=true" alt="feed example" width="210">
+    <img src="https://user-images.githubusercontent.com/87859856/173832751-aebb10aa-d3ea-47bf-afba-da4fe756f827.png?raw=true" alt="feed example" width="210">
 
-<img src="https://user-images.githubusercontent.com/87859856/173831375-fbc24562-1146-40bc-be89-a314a05c2513.png?raw=true" alt="feed example" width="210">
 </p>
 <p align ="center">
 <img src="https://user-images.githubusercontent.com/87859856/173831394-8448f8c9-c902-4428-953d-ef43e2909b78.png?raw=true" alt="feed example" width="205">
@@ -16,8 +15,7 @@ A new Flutter project.
  <img src="https://user-images.githubusercontent.com/87859856/173831419-5820e4e1-3cd3-4914-9209-47dd51b9c8d9.png?raw=true" alt="feed example" width="220">
  <img src="https://user-images.githubusercontent.com/87859856/173831465-243cdb56-4ec1-44c1-b9dc-09835181ddf7.png" alt="feed example" width="220">
 <img src="https://user-images.githubusercontent.com/87859856/173831475-eef557e0-51e8-4625-b34c-1b14d64d62fb.png?raw=true" alt="feed example" width="210">
-  <img src="https://user-images.githubusercontent.com/87859856/173832359-4d41aef1-2c77-4c70-8905-8c3934f6b77d.png?raw=true" alt="feed example" width="210">
-    <img src="https://user-images.githubusercontent.com/87859856/173832751-aebb10aa-d3ea-47bf-afba-da4fe756f827.png?raw=true" alt="feed example" width="210">
+
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
