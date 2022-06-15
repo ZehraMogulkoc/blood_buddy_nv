@@ -23,7 +23,7 @@ class _ContactDonorState extends State<ContactDonor> {
   List phone=[];
   getAllTransactions()async{
     var url =
-        "http://192.168.1.25/bloodbuddy/allContact.php";
+        "http://192.168.1.30/bloodbuddy/allContact.php";
 
     Uri myUri = Uri.parse(url);
 
@@ -40,7 +40,7 @@ print(blood);
   }
   getAllAdress()async{
     var url2 =
-        "http://192.168.1.25/bloodbuddy/contactAdress.php";
+        "http://192.168.1.30/bloodbuddy/contactAdress.php";
 
     Uri myUri2 = Uri.parse(url2);
 
@@ -56,7 +56,7 @@ print(blood);
   }
   getAllPhone()async{
     var url2 =
-        "http://192.168.1.25/bloodbuddy/contactphone.php";
+        "http://192.168.1.30/bloodbuddy/contactphone.php";
 
     Uri myUri2 = Uri.parse(url2);
 
