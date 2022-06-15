@@ -1,6 +1,9 @@
 # blood_buddy_nv
 
 A new Flutter project.
+Blood Buddy is a mobile application designed to facilitate communication between donors and blood needs. The application includes two separate interfaces for hospital staff and donors.
+
+The data is stored in the database system by using PHP and MySQL in the backend part.
 
   <img src="https://user-images.githubusercontent.com/87859856/173832359-4d41aef1-2c77-4c70-8905-8c3934f6b77d.png?raw=true" alt="feed example" width="210">
     <img src="https://user-images.githubusercontent.com/87859856/173832751-aebb10aa-d3ea-47bf-afba-da4fe756f827.png?raw=true" alt="feed example" width="210">
