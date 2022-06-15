@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
     String status= isDonor ?"Donor" :"Medical Personnel";
     Future<List?> login(bool isDonor)async{
 
-      Uri myUri = Uri.parse("http://10.0.2.2/bloodbuddy/donor_login.php");
+      Uri myUri = Uri.parse("http://192.168.1.30/bloodbuddy/donor_login.php");
       final response=await http.post(myUri,body:{
         //connect to login.php file and check if user exits and the password is correct. I f it is, then log in
         "email": email.text,
