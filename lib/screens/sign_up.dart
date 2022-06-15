@@ -35,13 +35,13 @@ class _SignUpState extends State<SignUp> {
     Future<List?> register() async {
 
       var url =
-          "http://192.168.1.25/bloodbuddy/donor_register.php";
+          "http://192.168.1.30/bloodbuddy/donor_register.php";
 
       var url_donor =
-          "http://192.168.1.25/bloodbuddy/donor.php";
+          "http://192.168.1.30/bloodbuddy/donor.php";
       var url_staff =
-          "http://192.168.1.25/bloodbuddy/hospital_staff.php";
-      var url_blodd="http://192.168.1.25/bloodbuddy/blood.php";
+          "http://192.168.1.30/bloodbuddy/hospital_staff.php";
+      var url_blodd="http://192.168.1.30/bloodbuddy/blood.php";
       //connect to register.php file
       Uri myUri = Uri.parse(url);
       Uri myUri_donor = Uri.parse(url_donor);
