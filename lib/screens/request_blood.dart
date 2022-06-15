@@ -54,9 +54,9 @@ var day;
   }
   Future<List?> registerRecipient() async {
 
-    var url ="http://192.168.1.25/bloodbuddy/recipient_register.php";
+    var url ="http://192.168.1.30/bloodbuddy/recipient_register.php";
 
-    var url_blodd="http://192.168.1.25/bloodbuddy/blood_recipient.php";
+    var url_blodd="http://192.168.1.30/bloodbuddy/blood_recipient.php";
     Uri myUri_blood = Uri.parse(url_blodd);
     //connect to register.php file
     Uri myUri = Uri.parse(url);
